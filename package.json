@@ -10,5 +10,8 @@
     "url": "git+https://github.com/fathens/Cordova-Plugin-AWS_Base.git"
   },
   "author": "f:athens",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "xml2js": "^0.4.17"
+  }
 }
