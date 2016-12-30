@@ -7,6 +7,8 @@ const plugin_id = process.argv[2]
 const gitrepo = process.argv[3]
 const target_file = 'config.xml';
 
+console.log("Running on: " + process.cwd());
+
 function modify(xml) {
     const elem = {
         $: {
@@ -44,7 +46,7 @@ function modify(xml) {
 fs.stat(target_file, (err, stats) => {
     if (err) {
         if (err.code === 'ENOENT') {
-            console.log("No target" + target_file);
+            console.log("No target: " + target_file);
         } else {
             throw err;
         }
