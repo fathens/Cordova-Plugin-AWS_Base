@@ -3,9 +3,18 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
 
+const target_file = '../../config.xml';
 const plugin_id = process.argv[2]
 const gitrepo = process.argv[3]
-const target_file = '../../config.xml';
+
+const variables = process.argv.slice(4).map((key) => {
+    return {
+        $: {
+            name: key,
+            value: process.env[key]
+        }
+    }
+})
 
 function modify(xml) {
     const elem = {
@@ -13,20 +22,7 @@ function modify(xml) {
             name: plugin_id,
             spec: gitrepo
         },
-        variable: [
-            {
-                $: {
-                    name: "AWS_REGION",
-                    value: process.env.AWS_REGION
-                }
-            },
-            {
-                $: {
-                    name: "AWS_COGNITO_IDENTITY_POOL",
-                    value: process.env.AWS_COGNITO_IDENTITY_POOL
-                }
-            }
-        ]
+        variable: variables
     };
     
     if (!xml.widget.plugin) xml.widget.plugin = [];
