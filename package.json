@@ -1,0 +1,19 @@
+{
+  "name": "cordova-plugin-aws",
+  "version": "0.0.1",
+  "description": "Cordova Plugin for AWS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fathens/Cordova-Plugin-AWS_Base.git"
+  },
+  "author": "f:athens",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fathens/Cordova-Plugin-AWS_Base/issues"
+  },
+  "homepage": "https://github.com/fathens/Cordova-Plugin-AWS_Base#readme"
+}
