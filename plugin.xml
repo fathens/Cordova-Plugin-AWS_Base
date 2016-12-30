@@ -10,14 +10,14 @@
     </engines>
 
     <preference name="AWS_REGION" />
-    <preference name="AWS_COGNITO_IDENTITY_POOL" />
+    <preference name="AWS_COGNITO_POOL_ID" />
 
     <platform name="android">
         <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
 
         <config-file target="AndroidManifest.xml" parent="application">
             <meta-data android:name="org.fathens.aws.region" android:value="$AWS_REGION"/>
-            <meta-data android:name="org.fathens.aws.cognito.identityPool" android:value="$AWS_COGNITO_IDENTITY_POOL"/>
+            <meta-data android:name="org.fathens.aws.cognito.identityPool" android:value="$AWS_COGNITO_POOL_ID"/>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
