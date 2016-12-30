@@ -5,9 +5,7 @@ const xml2js = require('xml2js');
 
 const plugin_id = process.argv[2]
 const gitrepo = process.argv[3]
-const target_file = 'config.xml';
-
-console.log("Running on: " + process.cwd());
+const target_file = '../../config.xml';
 
 function modify(xml) {
     const elem = {
