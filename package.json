@@ -1,0 +1,20 @@
+{
+  "name": "cordova-plugin-aws",
+  "version": "0.0.1",
+  "description": "Cordova Plugin for AWS",
+  "scripts": {
+    "postinstall": "add_plugin org.fathens.cordova.plugin.aws.Base https://github.com/fathens/Cordova-Plugin-AWS_Base.git"
+  },
+  "bin": {
+    "add_plugin": "./scripts/add_plugin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fathens/Cordova-Plugin-AWS_Base.git"
+  },
+  "author": "f:athens",
+  "license": "MIT",
+  "dependencies": {
+    "xml2js": "^0.4.17"
+  }
+}
