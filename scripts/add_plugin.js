@@ -1,9 +1,11 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const xml2js = require('xml2js');
 
+const plugin_id = process.argv[2]
+const gitrepo = process.argv[3]
 const target_file = 'config.xml';
-const plugin_id = "org.fathens.cordova.plugin.aws.Base";
-const gitrepo = "https://github.com/fathens/Cordova-Plugin-AWS_Base.git";
 
 function modify(xml) {
     const elem = {
