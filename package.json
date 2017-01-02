@@ -1,9 +1,9 @@
 {
   "name": "cordova-plugin-aws",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Cordova Plugin for AWS",
   "scripts": {
-    "postinstall": "add_plugin org.fathens.cordova.plugin.aws.Base https://github.com/fathens/Cordova-Plugin-AWS_Base.git AWS_REGION AWS_COGNITO_POOL_ID"
+    "postinstall": "add_plugin AWS_REGION AWS_COGNITO_POOL_ID"
   },
   "bin": {
     "add_plugin": "./scripts/add_plugin.js"
