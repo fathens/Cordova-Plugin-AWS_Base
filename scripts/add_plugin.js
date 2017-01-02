@@ -38,6 +38,7 @@ function read_plugin_id(callback) {
 function modify(xml) {
     read_plugin_id((plugin_id) => {
         read_gitrepo((gitrepo) => {
+            console.log(`plugin_id=${plugin_id}, git=${gitrepo}`);
             const elem = {
                 $: {
                     name: plugin_id,
