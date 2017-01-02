@@ -1,39 +1,65 @@
 #!/usr/bin/env node
 
+console.log(`Working on ${process.cwd()}`);
+
 const fs = require('fs');
 const xml2js = require('xml2js');
 
 const target_file = '../../config.xml';
-const plugin_id = process.argv[2]
-const gitrepo = process.argv[3]
 
-const variables = process.argv.slice(4).map((key) => {
+const variables = process.argv.slice(2).map((key) => {
+    const value = process.env[key];
+    if (!value) throw `Unknown environment variable: ${key}`;
     return {
         $: {
             name: key,
-            value: process.env[key]
+            value: value
         }
-    }
-})
+    };
+});
+
+function read_gitrepo(callback) {
+   fs.readFile('./package.json', 'utf-8', (err, data) => {
+       if (err) throw err;
+       const json = JSON.parse(data);
+       callback(json.repository.url);
+   });
+}
+
+function read_plugin_id(callback) {
+    fs.readFile('./plugin.xml', 'utf-8', (err, data) => {
+        if (err) throw err;
+        xml2js.parseString(data, (err, xml) => {
+            if (err) throw err;
+            callback(xml.plugin.$.id);
+        });
+    });
+}
+
 
 function modify(xml) {
-    const elem = {
-        $: {
-            name: plugin_id,
-            spec: gitrepo
-        },
-        variable: variables
-    };
-    
-    if (!xml.widget.plugin) xml.widget.plugin = [];
-    xml.widget.plugin.push(elem);
-    
-    const builder = new xml2js.Builder();
-    const modified = builder.buildObject(xml);
-    
-    fs.writeFile(target_file, modified, 'utf-8', (err) => {
-        if (err) throw err;
-        console.log("Added plugin: " + plugin_id);
+    read_plugin_id((plugin_id) => {
+        read_gitrepo((gitrepo) => {
+            console.log(`plugin_id=${plugin_id}, repo=${gitrepo}`);
+            const elem = {
+                $: {
+                    name: plugin_id,
+                    spec: gitrepo
+                },
+                variable: variables
+            };
+            
+            if (!xml.widget.plugin) xml.widget.plugin = [];
+            xml.widget.plugin.push(elem);
+            
+            const builder = new xml2js.Builder();
+            const modified = builder.buildObject(xml);
+            
+            fs.writeFile(target_file, modified, 'utf-8', (err) => {
+                if (err) throw err;
+                console.log("Added plugin: " + plugin_id);
+            });
+        });
     });
 }
 
