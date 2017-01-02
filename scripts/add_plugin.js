@@ -8,10 +8,12 @@ const xml2js = require('xml2js');
 const target_file = '../../config.xml';
 
 const variables = process.argv.slice(2).map((key) => {
+    const value = process.env[key];
+    if (!value) throw `Unknown environment variable: ${key}`;
     return {
         $: {
             name: key,
-            value: process.env[key]
+            value: value
         }
     };
 });
@@ -38,7 +40,7 @@ function read_plugin_id(callback) {
 function modify(xml) {
     read_plugin_id((plugin_id) => {
         read_gitrepo((gitrepo) => {
-            console.log(`plugin_id=${plugin_id}, git=${gitrepo}`);
+            console.log(`plugin_id=${plugin_id}, repo=${gitrepo}`);
             const elem = {
                 $: {
                     name: plugin_id,
