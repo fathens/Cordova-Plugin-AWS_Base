@@ -3,8 +3,6 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
 
-const package_json_file = 'package.json';
-const plugin_xml_file = 'plugin.xml';
 const target_file = '../../config.xml';
 
 const variables = process.argv.slice(2).map((key) => {
@@ -16,10 +14,10 @@ const variables = process.argv.slice(2).map((key) => {
     };
 });
 
-const gitrepo = require(package_json_file).repository.url;
+const gitrepo = require('./package.json').repository.url;
 
 function read_plugin_id(callback) {
-    fs.readFile(plugin_xml_file, 'utf-8', (err, data) => {
+    fs.readFile('./plugin.xml', 'utf-8', (err, data) => {
         if (err) throw err;
         xml2js.parseString(data, (err, xml) => {
             if (err) throw err;
