@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.log(`Working on ${process.cwd()}`);
+
 const fs = require('fs');
 const xml2js = require('xml2js');
 
