@@ -5,10 +5,11 @@ const himalaya = require('himalaya');
 
 const variable_names = process.argv.slice(2);
 
-const client = process.cwd().split('/').reverse()[0];
+const package_json = JSON.parse(fs.readFileSync('./package.json'));
+const client = `${package_json.name}@${package_json.version}`;
 console.log(`Working for ${client} with [${variable_names.join(', ')}]`);
 
-const target_file = "../../www/index.html";
+const target_file = "./www/index.html";
 
 function build_variables() {
     const tab = ' '.repeat(4);
@@ -58,9 +59,8 @@ function modify(data) {
     
     const html = json.find((e) => { return e.tagName === 'html' });
     const head = html.children.find((e) => { return e.tagName === 'head' });
-    const scripts = head.children.filter((e) => { return e.tagName === 'script' });
+    var scripts = head.children.filter((e) => { return e.tagName === 'script' });
     if (!scripts) scripts = [];
-    console.log('Before....\n' + JSON.stringify(scripts, null, 4));
     
     const sdk = inject_awssdk(scripts);
     const vals = inject_variables(scripts);
@@ -69,7 +69,6 @@ function modify(data) {
         if (sdk) head.children.push(sdk);
         if (vals) head.children.push(vals);
         
-        console.log('After....\n' + JSON.stringify(json, null, 4));
         return require('himalaya/translate').toHTML(json);
     }
 }

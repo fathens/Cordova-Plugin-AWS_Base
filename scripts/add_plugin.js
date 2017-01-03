@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-console.log(`Working on ${process.cwd()}`);
+const variable_names = process.argv.slice(2);
+console.log(`Working on ${process.cwd()} with [${variable_names}]`);
 
 const fs = require('fs');
 const xml2js = require('xml2js');
@@ -8,7 +9,7 @@ const xml2js = require('xml2js');
 const target_file = '../../config.xml';
 
 function lazy_variables() {
-    return process.argv.slice(2).map((key) => {
+    return variable_names.map((key) => {
         const value = process.env[key];
         if (!value) throw `Unknown environment variable: ${key}`;
         return {
