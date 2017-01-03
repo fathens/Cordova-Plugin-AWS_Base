@@ -6,7 +6,8 @@
     "postinstall": "add_plugin AWS_REGION AWS_COGNITO_POOL_ID"
   },
   "bin": {
-    "add_plugin": "./scripts/add_plugin.js"
+    "add_plugin": "./scripts/add_plugin.js",
+    "web_inject": "./scripts/web_inject.js"
   },
   "repository": {
     "type": "git",
