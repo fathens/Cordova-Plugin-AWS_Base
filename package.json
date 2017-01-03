@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-aws",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Cordova Plugin for AWS",
   "scripts": {
     "postinstall": "_inject_pre AWS_REGION AWS_COGNITO_POOL_ID"
