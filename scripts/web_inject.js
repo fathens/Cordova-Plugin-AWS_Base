@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const xml2js = require('xml2js');
+const himalaya = require('himalaya');
 
 const variable_names = process.argv.slice(2);
 
 const client = process.cwd().split('/').reverse()[0];
-console.log(`Working for ${client} with ${variable_names.join(', ')}`);
+console.log(`Working for ${client} with [${variable_names.join(', ')}]`);
 
 const target_file = "../../www/index.html";
 
@@ -16,50 +16,68 @@ function build_variables() {
         const value = process.env[key];
         if (!value) throw `Unknown environment variable: ${key}`;
         return `${tab}const ${key} = '${value}';`;
-    });
-    return `\n${lines.join('\n')}\n`;
+    }).join('\n');
+    return `\n${lines}\n`;
 }
 
 function inject_awssdk(scripts) {
     const found = scripts.find((e) => {
-        if (e.$.src) {
-            return e.$.src.startsWith('https://sdk.amazonaws.com/js/aws-sdk-');
+        if (e.attributes.src) {
+            return e.attributes.src.startsWith('https://sdk.amazonaws.com/js/aws-sdk-');
         }
     });
-    if (!found) {
-        scripts.unshift({
-            $: {
-                type: 'javascript',
-                src: 'https://sdk.amazonaws.com/js/aws-sdk-2.6.10.min.js'
-            }
-        });
-    }
+    if (found) return null;
+
+    return {
+        tagName: "script",
+        type: "Element",
+        content: "",
+        attributes: {
+            src: 'https://sdk.amazonaws.com/js/aws-sdk-2.6.10.min.js'
+        }
+    };
 }
 
 function inject_variables(scripts) {
-    if (!scripts.find((e) => { e.$.by === client })) {
-        scripts.push({
-            $: {
-                type: 'javascript',
-                by: client
-            },
-            _: build_variables()
-        });
-    }
+    if (variable_names.length < 1) return null;
+    if (scripts.find((e) => { return e.attributes.by === client })) return null;
+    
+    return {
+        tagName: "script",
+        type: "Element",
+        attributes: {
+            type: 'text/javascript',
+            by: client
+        },
+        content: build_variables()
+    };
 }
 
-function modify(html) {
-    const scripts = html.head.script;
-    if (!scripts) scripts = [];
+function modify(data) {
+    const json = himalaya.parse(data);
     
-    inject_awssdk(scripts);
-    inject_variables(scripts);
+    const html = json.find((e) => { return e.tagName === 'html' });
+    const head = html.children.find((e) => { return e.tagName === 'head' });
+    const scripts = head.children.filter((e) => { return e.tagName === 'script' });
+    if (!scripts) scripts = [];
+    console.log('Before....\n' + JSON.stringify(scripts, null, 4));
+    
+    const sdk = inject_awssdk(scripts);
+    const vals = inject_variables(scripts);
+    
+    if (sdk || vals) {
+        if (sdk) head.children.push(sdk);
+        if (vals) head.children.push(vals);
+        
+        console.log('After....\n' + JSON.stringify(json, null, 4));
+        return require('himalaya/translate').toHTML(json);
+    }
 }
 
 fs.stat(target_file, (err, stats) => {
     if (err) {
         if (err.code === 'ENOENT') {
-            console.log("No target: " + target_file);
+            console.log(`No target: '${target_file}'`);
         } else {
             throw err;
         }
@@ -67,10 +85,15 @@ fs.stat(target_file, (err, stats) => {
         if (stats.isFile()) {
             fs.readFile(target_file, 'utf-8', (err, data) => {
                 if (err) throw err;
-                xml2js.parseString(data, (err, xml) => {
-                    if (err) throw err;
-                    modify(xml);
-                });
+                const result = modify(data);
+                if (result) {
+                    fs.writeFile(target_file, result, 'utf-8', (err, data) => {
+                        if (err) throw err;
+                        console.log(`Wrote to '${target_file}'`);
+                    });
+                } else {
+                    console.log(`No need to modify '${target_file}'`);
+                }
             });
         }
     }
