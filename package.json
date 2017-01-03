@@ -6,9 +6,10 @@
     "envs": "AWS_REGION AWS_COGNITO_POOL_ID"
   },
   "scripts": {
-    "postinstall": "inject_pre ${npm_package_config_envs}"
+    "postinstall": "_inject_pre ${npm_package_config_envs}"
   },
   "bin": {
+    "_inject_pre": "./scripts/_inject_pre.js",
     "add_plugin": "./scripts/add_plugin.js",
     "web_inject": "./scripts/web_inject.js"
   },
