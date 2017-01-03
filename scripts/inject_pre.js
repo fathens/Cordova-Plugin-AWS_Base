@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+require("./add_plugin");
 
 const variable_names = process.argv.slice(2);
+console.log(`Working on ${process.cwd()} with [${variable_names}]`);
 
 const script_name = "prestart";
 const target_file = "../../package.json";
