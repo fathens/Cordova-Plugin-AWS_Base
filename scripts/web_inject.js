@@ -8,7 +8,7 @@ const variable_names = process.argv.slice(2);
 const client = process.cwd().split('/').reverse()[0];
 console.log(`Working for ${client} with [${variable_names.join(', ')}]`);
 
-const target_file = "../../www/index.html";
+const target_file = "./www/index.html";
 
 function build_variables() {
     const tab = ' '.repeat(4);
