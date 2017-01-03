@@ -60,7 +60,6 @@ function modify(data) {
     const head = html.children.find((e) => { return e.tagName === 'head' });
     var scripts = head.children.filter((e) => { return e.tagName === 'script' });
     if (!scripts) scripts = [];
-    console.log('Before....\n' + JSON.stringify(scripts, null, 4));
     
     const sdk = inject_awssdk(scripts);
     const vals = inject_variables(scripts);
@@ -69,7 +68,6 @@ function modify(data) {
         if (sdk) head.children.push(sdk);
         if (vals) head.children.push(vals);
         
-        console.log('After....\n' + JSON.stringify(json, null, 4));
         return require('himalaya/translate').toHTML(json);
     }
 }
