@@ -7,16 +7,18 @@ const xml2js = require('xml2js');
 
 const target_file = '../../config.xml';
 
-const variables = process.argv.slice(2).map((key) => {
-    const value = process.env[key];
-    if (!value) throw `Unknown environment variable: ${key}`;
-    return {
-        $: {
-            name: key,
-            value: value
-        }
-    };
-});
+function lazy_variables() {
+    return process.argv.slice(2).map((key) => {
+        const value = process.env[key];
+        if (!value) throw `Unknown environment variable: ${key}`;
+        return {
+            $: {
+                name: key,
+                value: value
+            }
+        };
+    });
+}
 
 function read_gitrepo(callback) {
    fs.readFile('./package.json', 'utf-8', (err, data) => {
@@ -46,7 +48,7 @@ function modify(xml) {
                     name: plugin_id,
                     spec: gitrepo
                 },
-                variable: variables
+                variable: lazy_variables()
             };
             
             if (!xml.widget.plugin) xml.widget.plugin = [];
