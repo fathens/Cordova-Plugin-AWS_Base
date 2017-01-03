@@ -58,7 +58,7 @@ function modify(data) {
     
     const html = json.find((e) => { return e.tagName === 'html' });
     const head = html.children.find((e) => { return e.tagName === 'head' });
-    const scripts = head.children.filter((e) => { return e.tagName === 'script' });
+    var scripts = head.children.filter((e) => { return e.tagName === 'script' });
     if (!scripts) scripts = [];
     console.log('Before....\n' + JSON.stringify(scripts, null, 4));
     
