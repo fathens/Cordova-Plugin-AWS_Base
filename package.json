@@ -3,11 +3,11 @@
   "version": "0.3.0",
   "description": "Cordova Plugin for AWS",
   "config": {
-    "vals": "AWS_REGION AWS_COGNITO_POOL_ID"
+    "envs": "AWS_REGION AWS_COGNITO_POOL_ID"
   },
   "scripts": {
-    "postinstall": "add_plugin ${npm_package_config_vals}",
-    "prestart": "web_inject ${npm_package_config_vals}"
+    "postinstall": "add_plugin ${npm_package_config_envs}",
+    "prestart": "web_inject ${npm_package_config_envs}"
   },
   "bin": {
     "add_plugin": "./scripts/add_plugin.js",
