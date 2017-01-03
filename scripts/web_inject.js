@@ -5,7 +5,8 @@ const himalaya = require('himalaya');
 
 const variable_names = process.argv.slice(2);
 
-const client = process.cwd().split('/').reverse()[0];
+const package_json = JSON.parse('./package.json');
+const client = `${package_json.name}@${package_json.version}`;
 console.log(`Working for ${client} with [${variable_names.join(', ')}]`);
 
 const target_file = "./www/index.html";
