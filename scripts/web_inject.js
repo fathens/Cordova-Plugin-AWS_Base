@@ -5,7 +5,7 @@ const himalaya = require('himalaya');
 
 const variable_names = process.argv.slice(2);
 
-const package_json = JSON.parse('./package.json');
+const package_json = JSON.parse(fs.readFileSync('./package.json'));
 const client = `${package_json.name}@${package_json.version}`;
 console.log(`Working for ${client} with [${variable_names.join(', ')}]`);
 
