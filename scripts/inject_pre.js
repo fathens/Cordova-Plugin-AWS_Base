@@ -18,7 +18,7 @@ function modify(data) {
         const injecting = line.match(regex);
         if (injecting) {
             const injects = injecting[2].split(' ');
-            const keys = injecting.concat(variable_names).filter((x, index, list) => {
+            const keys = injects.concat(variable_names).filter((x, index, list) => {
                 return list.indexOf(x) === index;
             });
             if (injects.length < keys.length) {
@@ -29,7 +29,7 @@ function modify(data) {
                 return null;
             }
         } else {
-            json.scripts[script_name] = line + "; web_inject" + variable_names.join(' ');
+            json.scripts[script_name] = line + "; web_inject " + variable_names.join(' ');
         }
     } else {
         json.scripts[script_name] = "web_inject " + variable_names.join(' ');
