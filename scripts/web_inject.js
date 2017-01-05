@@ -72,6 +72,13 @@ function inject_credential(scripts) {
         });
         AWS.config.credentials.get((err) => {
             console.log("AWS Credential refreshed. error=" + err);
+            if (err) {
+                console.log("Retry to initialize cognito by clearing identityId...");
+                AWS.config.credentials.params.IdentityId = null;
+                AWS.config.credentials.get((err) => {
+                    console.log("AWS Credential refreshed. error=" + err);
+                });
+            }
         });
 `
     };
