@@ -42,7 +42,7 @@ function inject_awssdk(scripts) {
 function inject_variables(scripts) {
     if (variable_names.length < 1) return null;
     if (scripts.find((e) => { return e.attributes.by === client })) return null;
-    
+
     return {
         tagName: "script",
         type: "Element",
@@ -51,6 +51,29 @@ function inject_variables(scripts) {
             by: client
         },
         content: build_variables()
+    };
+}
+
+function inject_credential(scripts) {
+    const owner = `credential#${client}`;
+    if (scripts.find((e) => { return e.attributes.by === owner })) return null;
+
+    return {
+        tagName: "script",
+        type: "Element",
+        attributes: {
+            type: 'text/javascript',
+            by: owner
+        },
+        content: `
+        AWS.config.region = AWS_REGION;
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: AWS_COGNITO_POOL_ID
+        });
+        AWS.config.credentials.get((err) => {
+            console.log("AWS Credential refreshed. error=" + err);
+        });
+`
     };
 }
 
@@ -64,10 +87,12 @@ function modify(data) {
     
     const sdk = inject_awssdk(scripts);
     const vals = inject_variables(scripts);
+    const cred = inject_credential(scripts);
     
-    if (sdk || vals) {
+    if (sdk || vals || cred) {
         if (sdk) head.children.push(sdk);
         if (vals) head.children.push(vals);
+        if (cred) head.children.push(cred);
         
         return require('himalaya/translate').toHTML(json);
     }
