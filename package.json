@@ -1,9 +1,11 @@
 {
   "name": "cordova-plugin-aws",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Cordova Plugin for AWS",
   "scripts": {
-    "postinstall": "_inject_pre AWS_REGION AWS_COGNITO_POOL_ID"
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "postinstall": "tsc && _inject_pre AWS_REGION AWS_COGNITO_POOL_ID || echo 'No scripts'"
   },
   "bin": {
     "_inject_pre": "./scripts/_inject_pre.js",
@@ -19,5 +21,11 @@
   "dependencies": {
     "himalaya": "^0.2.2",
     "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "typescript": "~2.0.10"
+  },
+  "peerDependencies": {
+    "typescript": "~2.0.10"
   }
 }
