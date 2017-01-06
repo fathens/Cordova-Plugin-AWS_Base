@@ -30,6 +30,15 @@
     <platform name="ios">
         <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
 
+        <config-file target="*-Info.plist" parent="CordovaAWS">
+            <dict>
+                <key>Region</key>
+                <string>$AWS_REGION</string>
+                <key>CognitoPool</key>
+                <string>$AWS_COGNITO_POOL_ID</string>
+            </dict>
+        </config-file>
+
         <config-file parent="/*" target="config.xml">
             <feature name="AwsBasePlugin">
                 <param name="ios-package" value="AwsBase"/>
