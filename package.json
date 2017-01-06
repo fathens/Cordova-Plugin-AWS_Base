@@ -2,6 +2,8 @@
   "name": "cordova-plugin-aws",
   "version": "0.6.0",
   "description": "Cordova Plugin for AWS",
+  "main": "dist/index.js",
+  "typings": "dist/index",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
