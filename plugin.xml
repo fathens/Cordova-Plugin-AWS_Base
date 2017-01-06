@@ -23,12 +23,19 @@
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET" />
         </config-file>
-
-        <hook type="after_prepare" src="platforms/android/hooks/after_prepare.rb"/>
     </platform>
 
     <platform name="ios">
         <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
+
+        <config-file target="*-Info.plist" parent="CordovaAWS">
+            <dict>
+                <key>Region</key>
+                <string>$AWS_REGION</string>
+                <key>CognitoPool</key>
+                <string>$AWS_COGNITO_POOL_ID</string>
+            </dict>
+        </config-file>
 
         <config-file parent="/*" target="config.xml">
             <feature name="AwsBasePlugin">
@@ -40,9 +47,7 @@
         <source-file src="platforms/ios/src/AwsBase.swift"/>
 
         <podfile swift_version="3.0">
-            <pod name="AWSCore" />
+            <pod name="AWSCore" version="~> 2.4.16" />
         </podfile>
-
-        <hook type="after_prepare" src="platforms/ios/hooks/after_prepare.rb"/>
     </platform>
 </plugin>
