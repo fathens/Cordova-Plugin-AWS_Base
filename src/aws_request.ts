@@ -1,9 +1,9 @@
 
-export interface AWS_Request {
-    send(callback: (err, data) => void): void;
+export interface AWS_Request<T> {
+    send(callback: (err, data: T) => void): void;
 }
 
-export async function aws_request<R>(request: AWS_Request): Promise<R> {
+export async function aws_request<R>(request: AWS_Request<R>): Promise<R> {
     return new Promise<R>((resolve, reject) => {
         request.send((err, data) => {
             if (err) {
