@@ -7,7 +7,7 @@ const variable_names = process.argv.slice(2);
 console.log(`Working on ${process.cwd()} with [${variable_names}]`);
 
 const script_name = "prestart";
-const target_file = "../../package.json";
+const target_file = "../../../package.json";
 
 function modify(data) {
     const json = JSON.parse(data);

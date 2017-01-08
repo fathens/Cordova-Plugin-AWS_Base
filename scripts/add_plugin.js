@@ -6,7 +6,7 @@ console.log(`Working on ${process.cwd()} with [${variable_names}]`);
 const fs = require('fs');
 const xml2js = require('xml2js');
 
-const target_file = '../../config.xml';
+const target_file = '../../../config.xml';
 
 function lazy_variables() {
     return variable_names.map((key) => {
