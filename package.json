@@ -1,5 +1,5 @@
 {
-  "name": "@cordova-plugin/aws-base",
+  "name": "@cordova-plugin/aws-core",
   "version": "0.7.0",
   "description": "Cordova Plugin for AWS",
   "main": "dist/index.js",
