@@ -7,12 +7,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "postinstall": "tsc && _inject_pre AWS_REGION AWS_COGNITO_POOL_ID || echo 'No scripts'"
-  },
-  "bin": {
-    "_inject_pre": "./scripts/_inject_pre.js",
-    "add_plugin": "./scripts/add_plugin.js",
-    "web_inject": "./scripts/web_inject.js"
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,6 +16,7 @@
   "author": "f:athens",
   "license": "MIT",
   "dependencies": {
+    "@cordova-plugin/core": "github:fathens/cordova-plugin-core#feature/build_scripts",
     "himalaya": "^0.2.2",
     "xml2js": "^0.4.17"
   },
