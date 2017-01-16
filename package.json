@@ -16,9 +16,7 @@
   "author": "f:athens",
   "license": "MIT",
   "dependencies": {
-    "@cordova-plugin/core": "github:fathens/cordova-plugin-core",
-    "himalaya": "^0.2.2",
-    "xml2js": "^0.4.17"
+    "@cordova-plugin/core": "github:fathens/cordova-plugin-core"
   },
   "devDependencies": {
     "typescript": "~2.0.10"
