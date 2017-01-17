@@ -1,2 +1,2 @@
-# Cordova-Plugin-AWS_Base
-Base Plugin for Cordova of native AWS
+# Cordova-Plugin-AWS-Core
+Core Plugin for Cordova of native AWS
