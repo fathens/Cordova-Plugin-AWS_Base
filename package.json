@@ -1,5 +1,5 @@
 {
-  "name": "@cordova-plugin/aws-base",
+  "name": "@cordova-plugin/aws-core",
   "version": "0.7.0",
   "description": "Cordova Plugin for AWS",
   "main": "dist/index.js",
@@ -7,22 +7,16 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "postinstall": "tsc && _inject_pre AWS_REGION AWS_COGNITO_POOL_ID || echo 'No scripts'"
-  },
-  "bin": {
-    "_inject_pre": "./scripts/_inject_pre.js",
-    "add_plugin": "./scripts/add_plugin.js",
-    "web_inject": "./scripts/web_inject.js"
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fathens/Cordova-Plugin-AWS_Base.git"
+    "url": "https://github.com/fathens/cordova-plugin-aws-core.git"
   },
   "author": "f:athens",
   "license": "MIT",
   "dependencies": {
-    "himalaya": "^0.2.2",
-    "xml2js": "^0.4.17"
+    "@cordova-plugin/core": "github:fathens/cordova-plugin-core"
   },
   "devDependencies": {
     "typescript": "~2.0.10"

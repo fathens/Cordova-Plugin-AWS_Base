@@ -1,0 +1,17 @@
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.10.min.js" />
+<script type="text/javascript" by="cordova-plugin-aws-core">
+    AWS.config.region = AWS_REGION;
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: AWS_COGNITO_POOL_ID
+    });
+    AWS.config.credentials.get((err) => {
+        console.log("AWS Credential refreshed. error=" + err);
+        if (err) {
+            console.log("Retry to initialize cognito by clearing identityId...");
+            AWS.config.credentials.params.IdentityId = null;
+            AWS.config.credentials.get((err) => {
+                console.log("AWS Credential refreshed. error=" + err);
+            });
+        }
+    });
+</script>
