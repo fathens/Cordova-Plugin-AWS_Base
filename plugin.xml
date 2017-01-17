@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="org.fathens.cordova.plugin.aws.Base" version="0.8.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="org.fathens.cordova.plugin.aws.core" version="0.8.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>Fabric</name>
     <description>Cordova Plugin for AWS</description>
     <license>MIT</license>
@@ -13,7 +13,7 @@
     <preference name="AWS_COGNITO_POOL_ID" />
 
     <platform name="android">
-        <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
+        <dependency id="org.fathens.cordova.plugin.lang.kotlin" url="https://github.com/fathens/cordova-plugin-kotlin.git" commit="master" />
 
         <config-file target="AndroidManifest.xml" parent="application">
             <meta-data android:name="org.fathens.aws.region" android:value="$AWS_REGION"/>
@@ -26,7 +26,7 @@
     </platform>
 
     <platform name="ios">
-        <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
+        <dependency id="org.fathens.cordova.plugin.lang.swift" url="https://github.com/fathens/cordova-plugin-swift.git" commit="master" />
 
         <config-file target="*-Info.plist" parent="CordovaAWS">
             <dict>
