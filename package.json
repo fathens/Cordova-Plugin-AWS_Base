@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "postinstall": "tsc"
+    "postinstall": "tsc && add_plugin"
   },
   "repository": {
     "type": "git",
