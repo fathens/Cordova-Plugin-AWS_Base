@@ -46,8 +46,8 @@
 
         <source-file src="platforms/ios/src/AwsBase.swift"/>
 
-        <podfile swift_version="3.0">
-            <pod name="AWSCore" version="~> 2.4.16" />
-        </podfile>
+        <framework src="AWSCore" type="podspec" spec="~> 2.4.16">
+            <bridging-header import="AWSCore/AWSCore.h" />
+        </framework>
     </platform>
 </plugin>
