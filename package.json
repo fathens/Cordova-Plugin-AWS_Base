@@ -1,13 +1,13 @@
 {
   "name": "@cordova-plugin/aws-core",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "Cordova Plugin for AWS",
   "main": "dist/index.js",
   "typings": "dist/index",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "postinstall": "tsc && add_plugin"
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
