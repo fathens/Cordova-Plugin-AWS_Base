@@ -4,7 +4,7 @@ cat > Gemfile <<EOF
 source 'https://rubygems.org'
 
 gem "cocoapods"
-gem "cordova_plugin_swift", :git => "https://github.com/fathens/Cordova-Plugin-Swift.git"
+gem "cordova_plugin_swift", :git => "https://github.com/fathens/cordova-plugin-swift.git"
 EOF
 
 bundle install && bundle update
@@ -23,6 +23,7 @@ podfile.ios_version ||= '10.0'
 
 bridge_file = PLATFORM_DIR/".Bridging-Header.h"
 File.open(bridge_file, 'w') { |dst|
+    dst.puts "#import <Cordova/CDV.h>"
     dst.puts podfile.pods.map {|p| p.bridging_headers }.flatten
 }
 
