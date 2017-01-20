@@ -4,7 +4,7 @@ cat > Gemfile <<EOF
 source 'https://rubygems.org'
 
 gem "cocoapods"
-gem "cordova_plugin_swift", :git => "https://github.com/fathens/Cordova-Plugin-Swift.git"
+gem "cordova_plugin_swift", :git => "https://github.com/fathens/cordova-plugin-swift.git"
 EOF
 
 bundle install && bundle update
