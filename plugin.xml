@@ -38,13 +38,13 @@
         </config-file>
 
         <config-file parent="/*" target="config.xml">
-            <feature name="AwsBasePlugin">
-                <param name="ios-package" value="AwsBase"/>
+            <feature name="AwsCorePlugin">
+                <param name="ios-package" value="AwsCore"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <source-file src="platforms/ios/src/AwsBase.swift"/>
+        <source-file src="platforms/ios/src/AwsCore.swift"/>
 
         <framework src="AWSCore" type="podspec" spec="~> 2.4.16">
             <bridging-header import="AWSCore/AWSCore.h" />

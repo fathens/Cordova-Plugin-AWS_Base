@@ -4,8 +4,8 @@ fileprivate func log(_ msg: String) {
     print(msg)
 }
 
-@objc(AwsBase)
-class AwsBase: CDVPlugin {
+@objc(AwsCore)
+class AwsCore: CDVPlugin {
     override func pluginInitialize() {
         fork {
             let infoDict: [String : String] = Bundle.main.infoDictionary!["CordovaAWS"] as! [String : String]
